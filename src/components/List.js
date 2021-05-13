@@ -16,7 +16,7 @@ function List({todoItems, deleteItem}) {
   }
   return (
       
-      <VStack divider={<StackDivider/>}  borderColor="gray.100" borderWidth="2px" borderRadius="lg" padding="5" width="100%" maxW={{base: "90vw", sm: "70vw", md: "60vw", lg: "50vw"}} alignItems="stretch">
+      <VStack divider={<StackDivider/>}  paddingBottom="0" borderColor="gray.100" borderWidth="2px" borderRadius="lg" padding="5" width="100%" maxW={{base: "90vw", sm: "70vw", md: "60vw", lg: "50vw"}} alignItems="stretch">
         {todoItems.map((todo) => (
             <>
           <HStack key={todo.id} >
