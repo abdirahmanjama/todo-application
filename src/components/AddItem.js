@@ -2,10 +2,14 @@ import { HStack } from '@chakra-ui/layout';
 import React, { useState } from 'react'
 import {Input, Button } from '@chakra-ui/react'
 import { nanoid } from 'nanoid'
+import { useToast } from "@chakra-ui/react"
 
 
 
 function AddItem({addItem}) {
+
+    const toast = useToast();
+
     function handleSubmit(e){
         e.preventDefault();
         const todo = {
@@ -20,7 +24,13 @@ function AddItem({addItem}) {
         }
 
         else {
-            
+            toast({
+                title: "Please enter a task",
+                status: "error",
+                duration: 2000,
+                isClosable: true,
+              })
+
         }
 
     }
@@ -29,7 +39,7 @@ function AddItem({addItem}) {
     return (
         <form onsubmit={handleSubmit}>
             <HStack paddingTop={8}>
-                <Input value={task} onChange={(e) => setTask(e.target.value)} variant="outline" placeholder="Add new item..."/>
+                <Input colorScheme = "grey" value={task} onChange={(e) => setTask(e.target.value)} variant="outline" placeholder="Add new item..."/>
                 <Button colorScheme="blue" px="8" type="submit" onClick={handleSubmit}>+ Add Task</Button>
             </HStack>
         </form>
