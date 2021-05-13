@@ -1,17 +1,39 @@
-import './App.css';
 import { Heading } from "@chakra-ui/react"
-import { Stack, HStack, VStack } from "@chakra-ui/react"
-import Add from './components/Add'
+import { VStack } from "@chakra-ui/react"
 import List from './components/List'
 import { IconButton } from "@chakra-ui/react"
-import {SunIcon, MoonIcon} from '@chakra-ui/icons'
+import { SunIcon, MoonIcon } from '@chakra-ui/icons'
+import AddItem from './components/AddItem';
+import { useState } from 'react'
+import Header from "./components/Header"
 
 function App() {
+  const initial = [
+    { id: 1, body: "Get grocery" },
+    { id: 2, body: "Go gym" },
+  ];
+
+  const [todoItems, setTodosItems] = useState(initial); 
+  
+  function deleteItem(id){
+    const newTodos = todoItems.filter(todo => {
+      return todo.id !== id;
+    })
+
+    setTodosItems(newTodos);
+
+  }
+
+  function addItem(todo){
+    setTodosItems([...todoItems, todo])
+  }
+
   return (
-    <VStack p={4}>
+    <VStack padding={6}>
       <IconButton icon={<SunIcon/>} isRound="true" size="lg" alignSelf="flex-end"/>
-      <Heading marginBottom="14" fontWeight="bold" size="2xl" color="blue.800">Todo Application</Heading>
-      <List></List>
+      <Header/>
+      <List todoItems={todoItems} deleteItem={deleteItem}></List>
+      <AddItem addItem = {addItem}/>
     </VStack>
   );
 }
